@@ -55,33 +55,3 @@ export async function createNonStreamingMultipartContent(
 
 }
 
-//testAI();
-
-// testing function
-async function testAI() {
-
-  try {
-
-    const projectId = process.env.GOOGLE_PROJECT_ID;
-    const location = process.env.GOOGLE_LOCATION;
-    const model = process.env.GOOGLE_MODEL;
-
-    if (!projectId || !location || !model) {
-        throw new Error('Google Cloud environment variables are not set');
-    }
-
-    const imagePath = path.join(__dirname, 'screenshot.png');
-    const imageFile = fs.readFileSync(imagePath);
-    var encoded = Buffer.from(imageFile).toString('base64');
-
-    console.log("imageBase64:", encoded);
-
-    const response =await createNonStreamingMultipartContent(projectId,location,model,encoded,'write me test cases to functional testin in specfic formate, and return in json formate');
-     // const response = await processImageAndQuery(imagePath, query);
-      console.log("AI Response:", response);
-    } catch (error) {
-      console.error("Error processing the image or query:", error);
-    } 
-  
-  }
-    
