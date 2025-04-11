@@ -1,6 +1,5 @@
 # AI Appium Lens Plugin
 
-
 ## Overview
 
 The AI Appium Lens Plugin is designed to enhance the capabilities of Appium by integrating AI-based image recognition and interaction features. This plugin leverages Google Cloud's Vision and Vertex AI services to provide advanced functionalities such as identifying elements on the screen and performing actions based on AI analysis.
@@ -9,8 +8,7 @@ The AI Appium Lens Plugin is designed to enhance the capabilities of Appium by i
 
 ## About Core Contributor
 
-* Creator: Anil Patidar (Games24x7) . [Linked in](https://in.linkedin.com/in/anilpatidar) [Follow me on LinkedIn](https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=anilpatidar)
-
+* Anil Patidar (Games24x7) . [Linked in](https://in.linkedin.com/in/anilpatidar) [Follow me on LinkedIn](https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=anilpatidar)
 
 ## Why is this Plugin Needed?
 
@@ -32,9 +30,11 @@ Generate actionable outputs like clickable element coordinates and hierarchical 
 ## Prerequisite
 
 You must have a google cloud account with payment configured and a project created.
+
 - ** Active/Enable two service under google cloud
-* Google Vision AI 
-* Google Vertex AI 
+
+* Google Vision AI
+* Google Vertex AI
 
 Download google cloud sdk ( google-cloud-cli-darwin-arm.tar.gz) : https://cloud.google.com/sdk/docs/install
 
@@ -61,26 +61,26 @@ export GOOGLE_PROJECT_ID=your-project-id
 export GOOGLE_LOCATION=your-location
 export GOOGLE_MODEL=your-model
 ```
+
 Supported LLM Model
 
 The following models support multimodal prompt responses.
+
 * Gemini 1.5 Flash
 * Gemini 1.5 Pro
 * Gemini 1.0 Pro Vision
-  
+
 ## Usage
 
 ## AI Click
 
 The aiClick method allows you to perform a click action on an element identified by AI.
 
-* First Register the command : 
+* First Register the command :
 
- 
-        driver.addCommand(HttpMethod.POST,
-                "/session/:sessionId/plugin/ai-appium-lens/aiClick",
-                "aiClick");
-                
+    driver.addCommand(HttpMethod.POST,
+            "/session/:sessionId/plugin/ai-appium-lens/aiClick",
+            "aiClick");
 
 ```sh
           driver.execute("aiClick",
@@ -92,7 +92,7 @@ The aiClick method allows you to perform a click action on an element identified
 
 ## Ask AI
 
-* First Register the command : 
+* First Register the command :
 
 ```sh
     driver.addCommand(HttpMethod.POST,
@@ -110,17 +110,16 @@ The askAI method allows you to send an instruction to the AI and get a response 
        System.out.println(result.getValue());
 ```
 
-
 ## Assert AI
 
 * First Register the command :
 
-  ```sh
+```sh
 
-    driver.addCommand(HttpMethod.POST,
-                "/session/:sessionId/plugin/ai-appium-lens/aiAssert",
-                "aiAssert");
-  ```
+  driver.addCommand(HttpMethod.POST,
+              "/session/:sessionId/plugin/ai-appium-lens/aiAssert",
+              "aiAssert");
+```
 
 The assertAI method allows you get the response in true/false for your statement.
 
@@ -135,14 +134,14 @@ The assertAI method allows you get the response in true/false for your statement
 
 ## fetchUIElementsMetadataJson AI
 
-* First Register the command : 
+* First Register the command :
 
-        driver.addCommand(HttpMethod.POST,
-                "/session/:sessionId/plugin/ai-appium-lens/fetchUIElementsMetadataJson",
-                "fetchUIElementsMetadataJson");
+    driver.addCommand(HttpMethod.POST,
+            "/session/:sessionId/plugin/ai-appium-lens/fetchUIElementsMetadataJson",
+            "fetchUIElementsMetadataJson");
 
-The fetchUIElementsMetadataJson method allows you to get complete UI meta info in json formate, 
-Example : 
+The fetchUIElementsMetadataJson method allows you to get complete UI meta info in json formate,
+Example :
 
 ```json
 [
@@ -182,6 +181,7 @@ Example :
 ```
 
 Create this class since it is being used in above fetchUIElementsMetadataJson command.
+
 ```sh
 @JsonIgnoreProperties(ignoreUnknown = true)
    static public class CustomJsonObject {
@@ -293,5 +293,69 @@ Create this class since it is being used in above fetchUIElementsMetadataJson co
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
 
+```markdown
+## How to Contribute
+
+1. Fork the repository to your GitHub account.
+2. Clone the forked repository to your local machine.
+3. Create a new branch for your feature or bug fix.
+4. Make your changes and commit them with clear and descriptive messages.
+5. Push your changes to your forked repository.
+6. Open a pull request to the main repository, describing your changes in detail.
+7. Address any feedback or requested changes from the maintainers.
+
+Feel free to reach out by opening an issue if you have questions or need clarification.
+```
+
+```markdown
+```markdown
+## How to Run Locally
+
+1. Clone the repository to your local machine:
+    ```sh
+    git clone https://github.com/games24x7-opensource/ai-appium-lens-plugin.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd ai-appium-lens-plugin
+    ```
+3. Install the required dependencies:
+    ```sh
+    npm install
+    npm run install-plugin
+    ```
+4. Start the Appium server with the plugin:
+    ```sh
+    appium --use-plugins=ai-appium-lens
+    ```
+5. Configure your test scripts to use the AI Appium Lens Plugin.
+6. Run your test scripts using your preferred test runner.
+```
+
+```sh
+
+```markdown
+```markdown
+## How to Run Individual File
+
+To run an individual file, use the following command:
+
+```sh
+npx ts-node ./src/google-vertexai.ts
+```
+
+```markdown
+[NPM Package Link](https://www.npmjs.com/package/ai-appium-lens)
+```
+
 License
 This project is licensed under the MIT License.
+
+```markdown
+```markdown
+[View License File](https://github.com/games24x7-opensource/ai-appium-lens-plugin/blob/main/LICENSE)
+```
+
+```text
+
+```
