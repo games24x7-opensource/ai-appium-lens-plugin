@@ -385,6 +385,10 @@ To run an individual file, use the following command:
 ```sh
 npx ts-node ./src/google-vertexai.ts
 
+```text
+
+```
+
 [NPM Package Link](https://www.npmjs.com/package/ai-appium-lens)
 
 License
@@ -392,6 +396,3 @@ This project is licensed under the MIT License.
 
 [View License File](https://github.com/games24x7-opensource/ai-appium-lens-plugin/blob/main/LICENSE)
 
-```text
-
-```
