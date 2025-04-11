@@ -54,13 +54,62 @@ To install the AI Appium Lens Plugin, follow these steps:
 
 appium plugin install --source=npm ai-appium-lens
 
-Set enviornment variables :
+## Setting Up Google Cloud Account and Services
 
-```sh
-export GOOGLE_PROJECT_ID=your-project-id
-export GOOGLE_LOCATION=your-location
-export GOOGLE_MODEL=your-model
-```
+To use the AI Appium Lens Plugin with Google Vertex AI and Cloud Vision API, follow these steps:
+
+### Prerequisites
+- A Google Cloud account with payment configured.
+- A project created in Google Cloud.
+
+### Enable Required Services
+1. **Google Vision AI**
+2. **Google Vertex AI**
+
+### Configuration Options
+You can configure Google Cloud in two ways. Follow **Steps ** 
+---
+
+### Step : CI Setup
+1. **Create a Service Account**:
+    - Go to **IAM & Admin → Service Accounts** in the Google Cloud Console.
+    - Click **Create Service Account** and provide a name and ID.
+    - Assign roles like `Vertex AI User` and `Storage Admin`.
+    - Click **Done** and download the service account key in JSON format.
+
+2. **Set Environment Variables**:
+    ```sh
+    export GOOGLE_APPLICATION_CREDENTIALS="/path/to/serviceaccount_vertex_ai.json"
+    export GOOGLE_PROJECT_ID=your-project-id
+    export GOOGLE_LOCATION=asia-south1
+    export GOOGLE_MODEL=gemini-1.5-flash-001
+    ```
+
+---
+
+### Enabling APIs
+1. Go to **API & Services → Enable APIs and Services** in the Google Cloud Console.
+2. Search for and enable:
+    - **Vertex AI API**
+    - **Cloud Vision API**
+
+---
+
+### Setting Up Billing
+1. Go to **Billing** in the left sidebar.
+2. Link a billing account to your project.
+
+---
+
+### Granting Administrative Access
+1. Go to **IAM & Admin → IAM**.
+2. Add users and assign roles like:
+    - `Vertex AI Administrator`
+    - `Editor`
+
+---
+
+By completing these steps, your Google Cloud account will be ready for use with the AI Appium Lens Plugin.
 
 Supported LLM Model
 
