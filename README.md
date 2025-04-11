@@ -293,7 +293,6 @@ Create this class since it is being used in above fetchUIElementsMetadataJson co
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
 
-```markdown
 ## How to Contribute
 
 1. Fork the repository to your GitHub account.
@@ -305,10 +304,7 @@ Contributions are welcome! Please open an issue or submit a pull request on GitH
 7. Address any feedback or requested changes from the maintainers.
 
 Feel free to reach out by opening an issue if you have questions or need clarification.
-```
 
-```markdown
-```markdown
 ## How to Run Locally
 
 1. Clone the repository to your local machine:
@@ -330,31 +326,20 @@ Feel free to reach out by opening an issue if you have questions or need clarifi
     ```
 5. Configure your test scripts to use the AI Appium Lens Plugin.
 6. Run your test scripts using your preferred test runner.
-```
 
-```sh
-
-```markdown
-```markdown
 ## How to Run Individual File
 
 To run an individual file, use the following command:
 
 ```sh
 npx ts-node ./src/google-vertexai.ts
-```
 
-```markdown
 [NPM Package Link](https://www.npmjs.com/package/ai-appium-lens)
-```
 
 License
 This project is licensed under the MIT License.
 
-```markdown
-```markdown
 [View License File](https://github.com/games24x7-opensource/ai-appium-lens-plugin/blob/main/LICENSE)
-```
 
 ```text
 
