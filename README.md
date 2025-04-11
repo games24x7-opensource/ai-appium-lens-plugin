@@ -338,7 +338,7 @@ Create this class since it is being used in above fetchUIElementsMetadataJson co
 ```
 ## About Core Contributor
 
-* Anil Patidar (Games24x7) . [Linked in](https://in.linkedin.com/in/anilpatidar) [Follow me on LinkedIn](https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=anilpatidar)
+* Anil Patidar (Games24x7) . [Linked in](https://in.linkedin.com/in/anilpatidar) [Follow me on LinkedIn](https://in.linkedin.com/in/anilpatidar)
 
 
 Contributing
