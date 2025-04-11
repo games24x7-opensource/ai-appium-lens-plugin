@@ -66,9 +66,11 @@ Supported LLM Model
 
 The following models support multimodal prompt responses.
 
-* Gemini 1.5 Flash
-* Gemini 1.5 Pro
-* Gemini 1.0 Pro Vision
+* gemini-2.0-flash
+* gemini-1.5-pro	
+* gemini-1.5-flash
+
+One can find more details here : https://ai.google.dev/gemini-api/docs/models
 
 ## Usage
 
