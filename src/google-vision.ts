@@ -70,7 +70,7 @@ export async function getCoordinatesByInput(input: string, ssPath: string,  take
       console.log(`Coordinates: (${points.x}, ${points.y})`);
       return points;
     } else {
-      console.log('Sequence not found');
+      console.log('Unable to find the element on the screen, Please check the input text');
       return null;
     }
 
@@ -104,17 +104,3 @@ function getCoordinates(keys: string[], values: Coordinate[], input: string, mat
 
     return null;
 }
-
-//testAI();
-
-async function testAI() {
-  try {
-    //const multiplier = getDeviceMultiplier(390, 844);
-
-    const response = await getCoordinatesByInput('AUS', '/Users/anil-patidar/Desktop/AppiumLensAI/src/screenshots/screenshot-2024-11-24T17-57-08-339Z.png', true, 'session1',1);
-    console.log("AI Response:", response);
-  } catch (error) {
-    console.error("Error processing the image or query:", error);
-  }
-}
-

@@ -33,7 +33,7 @@ export async function createNonStreamingMultipartContent(
       contents: [{role: 'user', parts: [filePart, textPart1]}],
     };
   
-    console.log('Prompt Text:');
+    console.log('Prompt Text: ');
     const textPart2 = request.contents[0].parts[1];
   if ('text' in textPart2) {
     console.log(textPart1.text);
