@@ -1,7 +1,9 @@
 // Importing the Google Cloud Vision and Vertex AI libraries
 const vision = require('@google-cloud/vision');
 const {VertexAI} = require('@google-cloud/vertexai');
+import { logger } from 'appium/support'; // Logger utility
 
+const log = logger.getLogger('AI-APPIUM-LENS');
 // Importing Node.js modules for file and path handling
 const path = require('path');
 const fs = require('fs');
@@ -43,14 +45,14 @@ export async function createNonStreamingMultipartContent(
   };
 
   // Log the instruction text for debugging purposes
-  console.log('Prompt Text: ');
+  log.info('Prompt Text: ');
   const textPart2 = request.contents[0].parts[1];
   if ('text' in textPart2) {
-    console.log(textPart1.text);
+    log.info(textPart1.text);
   }
 
   // Log a placeholder for the AI response
-  console.log('AI Response:');
+  log.info('AI Response:');
 
   // Generate a response using the generative model
   const response = await generativeVisionModel.generateContent(request);
@@ -67,11 +69,11 @@ export async function createNonStreamingMultipartContent(
   ) {
     // Extract the text content from the response
     const fullTextResponse = response.response.candidates[0].content.parts[0].text;
-    console.log(fullTextResponse);
+    log.info(fullTextResponse);
     return fullTextResponse;
   } else {
     // Log an error if the response format is invalid
-    console.error('Invalid response format:', response);
+    log.error('Invalid response format:', response);
   }
 }
 

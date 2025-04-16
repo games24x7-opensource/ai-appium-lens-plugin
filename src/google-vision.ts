@@ -1,8 +1,10 @@
 // Importing the Google Cloud Vision library for text detection
 const googleVision = require('@google-cloud/vision');
+import { logger } from 'appium/support'; // Logger utility
 
 // Importing LokiJS for lightweight in-memory database
 const loki = require('lokijs');
+const log = logger.getLogger('AI-APPIUM-LENS');
 
 // Initializing the LokiJS database and creating a collection for storing coordinates
 const db = new loki('coordinates.db');
@@ -49,27 +51,27 @@ export async function getCoordinatesByInput(
 
       // Iterate through the detected text annotations
       detections.forEach((text: TextAnnotation, index: number) => {
-        console.log(`#index ${index} Description: ${text.description}`);
-        console.log('Bounding Poly:');
+        log.info(`#index ${index} Description: ${text.description}`);
+        log.info('Bounding Poly:');
         if (index > 0) { // Skip the first annotation (it contains the full text)
           keys.push(text.description.trim().toLowerCase()); // Store the text description
           const vertices = text.boundingPoly.vertices; // Get the bounding polygon vertices
           vertices.forEach((vertex, vertexIndex) => {
             if (vertexIndex == 1) { // Use the second vertex for coordinates
-              console.log(`Vertex ${vertexIndex}: (${vertex.x}, ${vertex.y})`);
+              log.info(`Vertex ${vertexIndex}: (${vertex.x}, ${vertex.y})`);
               values.push({ x: vertex.x, y: vertex.y }); // Store the coordinates
             }
           });
         }
       });
 
-      console.log('Keys:', keys);
-      console.log('Values:', values);
+      log.info('Keys:', keys);
+      log.info('Values:', values);
 
       // Store the detected keys and values in the database
       coordinatesCollection.insert({ sessionId, keys, values });
       db.saveDatabase();
-      console.log(`stored in db ${coordinatesCollection.findOne({ sessionId })} `);
+      log.info(`stored in db ${coordinatesCollection.findOne({ sessionId })} `);
 
     } else {
       // If no new screenshot is required, retrieve data from the database
@@ -78,7 +80,7 @@ export async function getCoordinatesByInput(
         keys.push(...record.keys); // Retrieve stored keys
         values.push(...record.values); // Retrieve stored values
       } else {
-        console.log('No record found for the given session ID');
+        log.error('No record found for the given session ID');
         return null;
       }
     }
@@ -86,16 +88,16 @@ export async function getCoordinatesByInput(
     // Find the coordinates of the input text
     const points = getCoordinates(keys, values, input, index);
     if (points) {
-      console.log(`Coordinates: (${points.x}, ${points.y})`);
+      log.info(`Coordinates: (${points.x}, ${points.y})`);
       return points; // Return the coordinates if found
     } else {
-      console.log('Unable to find the element on the screen, Please check the input text');
+      log.error('Unable to find the element on the screen, Please check the input text');
       return null; // Return null if the text is not found
     }
 
   } catch (error) {
     // Handle errors during text detection or database operations
-    console.error("Error processing the image or query:", error);
+    log.error("Error processing the image or query:", error);
     return null;
   }
 }

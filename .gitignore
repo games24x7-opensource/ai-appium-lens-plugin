@@ -4,3 +4,4 @@ src/screenshots/
 .npmrc
 coordinates.db
 src/**/*.js
+lib

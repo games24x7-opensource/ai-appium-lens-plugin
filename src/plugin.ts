@@ -8,7 +8,6 @@ import loki from 'lokijs'; // Lightweight in-memory database
 const TAP_DURATION_MS = 250; // Duration for tap actions in milliseconds
 
 // Importing package information and initializing logger
-const packageJson = require('../package.json');
 const log = logger.getLogger('AI-APPIUM-LENS');
 
 // Importing Node.js modules for file and path handling
@@ -36,9 +35,9 @@ async function askGoogleVisionAI(instruction: string, encodedImg: string): Promi
 
         // Call Vertex AI to process the instruction and image
         response = await createNonStreamingMultipartContent(projectId, location, model, encodedImg, instruction);
-        console.log("AI Response:", response);
+        log.info("AI Response:", response);
     } catch (error) {
-        console.error("Error processing the image or query:", error);
+        log.error("Error processing the image or query:", error);
     }
     return response;
 }
