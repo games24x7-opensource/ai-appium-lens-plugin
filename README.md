@@ -6,6 +6,8 @@ The AI Appium Lens Plugin is designed to enhance the capabilities of Appium by i
 
 ![image](https://github.com/games24x7-opensource/ai-appium-lens-plugin/blob/main/AI-APPIUM-LENS.png)
 
+[![Watch the video](https://img.youtube.com/vi/FpZ4-0vg5mQ/0.jpg)](https://www.youtube.com/live/FpZ4-0vg5mQ?si=8-EkgN5RLXP55-gj)
+
 ## Why is this Plugin Needed?
 
 Automated testing often requires interacting with elements on the screen that may not have easily identifiable locators. Traditional methods rely heavily on static locators, which can be brittle and fail when the UI changes. The AI Appium Lens Plugin addresses this issue by using AI to dynamically identify and interact with elements based on their visual characteristics, making your tests more robust and adaptable to UI changes.
@@ -55,53 +57,61 @@ appium plugin install --source=npm ai-appium-lens
 To use the AI Appium Lens Plugin with Google Vertex AI and Cloud Vision API, follow these steps:
 
 ### Prerequisites
+
 - A Google Cloud account with payment configured.
 - A project created in Google Cloud.
 
 ### Enable Required Services
+
 1. **Google Vision AI**
 2. **Google Vertex AI**
 
 ### Configuration Options
-You can configure Google Cloud in two ways. Follow **Steps ** 
----
+
+## You can configure Google Cloud in two ways. Follow **Steps **
 
 ### Step : CI Setup
+
 1. **Create a Service Account**:
-    - Go to **IAM & Admin → Service Accounts** in the Google Cloud Console.
-    - Click **Create Service Account** and provide a name and ID.
-    - Assign roles like `Vertex AI User` and `Storage Admin`.
-    - Click **Done** and download the service account key in JSON format.
+
+   - Go to **IAM & Admin → Service Accounts** in the Google Cloud Console.
+   - Click **Create Service Account** and provide a name and ID.
+   - Assign roles like `Vertex AI User` and `Storage Admin`.
+   - Click **Done** and download the service account key in JSON format.
 
 2. **Set Environment Variables**:
-    ```sh
-    export GOOGLE_APPLICATION_CREDENTIALS="/path/to/serviceaccount_vertex_ai.json"
-    export GOOGLE_PROJECT_ID=your-project-id
-    export GOOGLE_LOCATION=asia-south1
-    export GOOGLE_MODEL=gemini-1.5-flash-001
-    ```
+
+```sh
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/serviceaccount_vertex_ai.json"
+export GOOGLE_PROJECT_ID=your-project-id
+export GOOGLE_LOCATION=asia-south1
+export GOOGLE_MODEL=gemini-1.5-flash-001
+```
 
 ---
 
 ### Enabling APIs
+
 1. Go to **API & Services → Enable APIs and Services** in the Google Cloud Console.
 2. Search for and enable:
-    - **Vertex AI API**
-    - **Cloud Vision API**
+   - **Vertex AI API**
+   - **Cloud Vision API**
 
 ---
 
 ### Setting Up Billing
+
 1. Go to **Billing** in the left sidebar.
 2. Link a billing account to your project.
 
 ---
 
 ### Granting Administrative Access
+
 1. Go to **IAM & Admin → IAM**.
 2. Add users and assign roles like:
-    - `Vertex AI Administrator`
-    - `Editor`
+   - `Vertex AI Administrator`
+   - `Editor`
 
 ---
 
@@ -112,7 +122,7 @@ Supported LLM Model
 The following models support multimodal prompt responses.
 
 * gemini-2.0-flash
-* gemini-1.5-pro	
+* gemini-1.5-pro
 * gemini-1.5-flash
 
 One can find more details here : https://ai.google.dev/gemini-api/docs/models
@@ -125,9 +135,9 @@ The aiClick method allows you to perform a click action on an element identified
 
 * First Register the command :
 
-    driver.addCommand(HttpMethod.POST,
-            "/session/:sessionId/plugin/ai-appium-lens/aiClick",
-            "aiClick");
+   driver.addCommand(HttpMethod.POST,
+   "/session/:sessionId/plugin/ai-appium-lens/aiClick",
+   "aiClick");
 
 ```sh
           driver.execute("aiClick",
@@ -183,9 +193,9 @@ The assertAI method allows you get the response in true/false for your statement
 
 * First Register the command :
 
-    driver.addCommand(HttpMethod.POST,
-            "/session/:sessionId/plugin/ai-appium-lens/fetchUIElementsMetadataJson",
-            "fetchUIElementsMetadataJson");
+   driver.addCommand(HttpMethod.POST,
+   "/session/:sessionId/plugin/ai-appium-lens/fetchUIElementsMetadataJson",
+   "fetchUIElementsMetadataJson");
 
 The fetchUIElementsMetadataJson method allows you to get complete UI meta info in json formate,
 Example :
@@ -336,10 +346,10 @@ Create this class since it is being used in above fetchUIElementsMetadataJson co
     }
 
 ```
+
 ## About Core Contributor
 
 * Anil Patidar (Games24x7) . [Linked in](https://in.linkedin.com/in/anilpatidar) [Follow me on LinkedIn](https://in.linkedin.com/in/anilpatidar)
-
 
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
@@ -359,23 +369,32 @@ Feel free to reach out by opening an issue if you have questions or need clarifi
 ## How to Run Locally
 
 1. Clone the repository to your local machine:
-    ```sh
-    git clone https://github.com/games24x7-opensource/ai-appium-lens-plugin.git
-    ```
+
+```sh
+git clone https://github.com/games24x7-opensource/ai-appium-lens-plugin.git
+```
+
 2. Navigate to the project directory:
-    ```sh
-    cd ai-appium-lens-plugin
-    ```
+
+```sh
+cd ai-appium-lens-plugin
+```
+
 3. Install the required dependencies:
-    ```sh
-    npm install
-    npm run install-plugin
-    ```
+
+```sh
+npm install
+npm run install-plugin
+```
+
 4. Start the Appium server with the plugin:
-    ```sh
-    appium --use-plugins=ai-appium-lens
-    ```
+
+```sh
+appium --use-plugins=ai-appium-lens
+```
+
 5. Configure your test scripts to use the AI Appium Lens Plugin.
+
 6. Run your test scripts using your preferred test runner.
 
 ## How to Run Individual File
