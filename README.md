@@ -6,10 +6,6 @@ The AI Appium Lens Plugin is designed to enhance the capabilities of Appium by i
 
 ![image](https://github.com/games24x7-opensource/ai-appium-lens-plugin/blob/main/AI-APPIUM-LENS.png)
 
-## About Core Contributor
-
-* Anil Patidar (Games24x7) . [Linked in](https://in.linkedin.com/in/anilpatidar) [Follow me on LinkedIn](https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=anilpatidar)
-
 ## Why is this Plugin Needed?
 
 Automated testing often requires interacting with elements on the screen that may not have easily identifiable locators. Traditional methods rely heavily on static locators, which can be brittle and fail when the UI changes. The AI Appium Lens Plugin addresses this issue by using AI to dynamically identify and interact with elements based on their visual characteristics, making your tests more robust and adaptable to UI changes.
@@ -340,6 +336,10 @@ Create this class since it is being used in above fetchUIElementsMetadataJson co
     }
 
 ```
+## About Core Contributor
+
+* Anil Patidar (Games24x7) . [Linked in](https://in.linkedin.com/in/anilpatidar) [Follow me on LinkedIn](https://in.linkedin.com/in/anilpatidar)
+
 
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
@@ -384,6 +384,7 @@ To run an individual file, use the following command:
 
 ```sh
 npx ts-node ./src/google-vertexai.ts
+```
 
 [NPM Package Link](https://www.npmjs.com/package/ai-appium-lens)
 
@@ -392,6 +393,3 @@ This project is licensed under the MIT License.
 
 [View License File](https://github.com/games24x7-opensource/ai-appium-lens-plugin/blob/main/LICENSE)
 
-```text
-
-```
