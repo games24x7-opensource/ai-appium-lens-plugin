@@ -8,7 +8,7 @@ import loki from 'lokijs'; // Lightweight in-memory database
 const TAP_DURATION_MS = 250; // Duration for tap actions in milliseconds
 
 // Importing package information and initializing logger
-const log = logger.getLogger('AI-APPIUM-LENS');
+const log = logger.getLogger('AiAppiumLens');
 
 // Importing Node.js modules for file and path handling
 const path = require('path');
@@ -47,8 +47,34 @@ const SOURCE_URL_REGEX = new RegExp('/session/[^/]+/plugin/ai-appium-lens');
 
 // Main plugin class extending the BasePlugin
 class AIAppiumLens extends BasePlugin {
+
+    commands = [
+        'askAI',
+        'aiClick',
+        'aiAssert',
+        'fetchUIElementsMetadataJson',
+        'deleteSession'
+    ];
+
     constructor(pluginName: string) {
         super(pluginName);
+    }
+
+    // Custom implementation for the DELETE command
+    async deleteSession(next: Function, driver: any, ...args: any[]): Promise<any> {
+        log.info('Custom DELETE /session/:sessionId called');
+        const sessionId = args[0];
+ 
+        // Perform any cleanup logic here
+        log.info(`Cleaning up resources for sessionId: ${sessionId}`);
+
+        sessions.removeWhere((obj) => obj.sessionId === sessionId);
+        log.info(`Session ${sessionId} removed from database`);
+        // Call the original deleteSession logic if needed
+        await next();
+
+        log.info(`Session ${sessionId} deleted successfully`);
+        return { success: true, message: `Session ${sessionId} deleted` };
     }
 
     // Determines if a route should bypass proxying
