@@ -43,7 +43,12 @@ async function askGoogleVisionAI(instruction: string, encodedImg: string): Promi
 }
 
 // Regular expression to match plugin-specific routes
-const SOURCE_URL_REGEX = new RegExp('/session/[^/]+/plugin/ai-appium-lens');
+const SOURCE_URL_askAI_REGEX = new RegExp('/session/[^/]+/plugin/askAI');
+const CHECK_TEXT_aiClick_URL_REGEX = new RegExp('/session/[^/]+/plugin/aiClick');
+const CHECK_TEXT_aiAssert_URL_REGEX = new RegExp('/session/[^/]+/plugin/aiAssert');
+const CHECK_TEXT_fetchUIElementsMetadataJson_URL_REGEX = new RegExp('/session/[^/]+/plugin/fetchUIElementsMetadataJson');
+const CHECK_TEXT_aiGetAllLocators_URL_REGEX = new RegExp('/session/[^/]+/plugin/aiGetAllLocators');
+const CHECK_TEXT_deleteSession_URL_REGEX = new RegExp('/session/[^/]+/plugin/deleteSession');
 
 // Main plugin class extending the BasePlugin
 class AIAppiumLens extends BasePlugin {
@@ -53,7 +58,8 @@ class AIAppiumLens extends BasePlugin {
         'aiClick',
         'aiAssert',
         'fetchUIElementsMetadataJson',
-        'deleteSession'
+        'deleteSession',
+        'aiGetAllLocators'
     ];
 
     constructor(pluginName: string) {
@@ -62,7 +68,7 @@ class AIAppiumLens extends BasePlugin {
 
     // Custom implementation for the DELETE command
     async deleteSession(next: Function, driver: any, ...args: any[]): Promise<any> {
-        log.info('Custom DELETE /session/:sessionId called');
+        log.info('DELETE /session/:sessionId called');
         const sessionId = args[0];
  
         // Perform any cleanup logic here
@@ -80,38 +86,66 @@ class AIAppiumLens extends BasePlugin {
     // Determines if a route should bypass proxying
     shouldAvoidProxy(_method: any, route: string, _body: any): boolean {
         log.info(`Checking if route ${route} should be avoided`);
-        return SOURCE_URL_REGEX.test(route);
+        return SOURCE_URL_askAI_REGEX.test(route) ||
+            CHECK_TEXT_aiClick_URL_REGEX.test(route) ||
+            CHECK_TEXT_aiAssert_URL_REGEX.test(route) ||    
+            CHECK_TEXT_fetchUIElementsMetadataJson_URL_REGEX.test(route) ||
+            CHECK_TEXT_aiGetAllLocators_URL_REGEX.test(route) ||
+            CHECK_TEXT_deleteSession_URL_REGEX.test(route);
     }
+
+    
 
     // Define new API endpoints for the plugin
     static newMethodMap = {
-        '/session/:sessionId/plugin/ai-appium-lens/askAI': {
+        '/session/:sessionId/plugin/askAI': {
             POST: {
                 command: 'askAI',
                 payloadParams: { required: ['instruction'] },
             },
         },
-        '/session/:sessionId/plugin/ai-appium-lens/aiClick': {
+        '/session/:sessionId/plugin/aiClick': {
             POST: {
                 command: 'aiClick',
                 payloadParams: { required: ['text', 'index', 'takeANewScreenShot'] },
             },
         },
-        '/session/:sessionId/plugin/ai-appium-lens/aiAssert': {
+        '/session/:sessionId/plugin/aiAssert': {
             POST: {
                 command: 'aiAssert',
                 payloadParams: { required: ['text'] },
             },
         },
-        '/session/:sessionId/plugin/ai-appium-lens/fetchUIElementsMetadataJson': {
+        '/session/:sessionId/plugin/fetchUIElementsMetadataJson': {
             POST: {
                 command: 'fetchUIElementsMetadataJsonaiAssert',
+            },
+        },
+        '/session/:sessionId/plugin/aiGetAllLocators': {
+            POST: {
+                command: 'aiGetAllLocators',
             },
         },
     };
 
     // Handles the askAI command
-    async askAI(next: Function, driver: any, ...args: any[]): Promise<any> {
+    async aiGetAllLocators(next: Function, driver: any, ...args: any[]): Promise<any> {
+        log.info(`aiGetAllLocators command called`);
+        var instruction = 'You are a Appium Pro, You know UIAutomator2 very well, Providing you an image of mobile screen and its DOM XML, please provide me the locators of all the elements in the image and DOM, Also strickly follow Appium guideline, prioritize the accessibility id, id, and other strong locators first and at last if you dont find these, go to xpath but for those element no id present, return atleast xpth , dont just leave them, but try to give strong locators  and return the response strictly in only JSON format';  
+        const takeANewScreenShot = true;
+        const sessionId = driver.sessionId;
+        // Capture a screenshot and convert it to base64
+        const screenshotPath = await this.getScreenshotPath(driver, sessionId, takeANewScreenShot);
+        const base64Screenshot = fs.readFileSync(screenshotPath, 'base64');
+        const pageSource= await driver.getPageSource();
+        instruction += `, and the DOM XML is ${pageSource}`;
+        // Send the instruction and screenshot to Google Vision AI
+        return await askGoogleVisionAI(instruction, base64Screenshot);
+    }
+
+
+      // Handles the askAI command
+      async askAI(next: Function, driver: any, ...args: any[]): Promise<any> {
         const instruction = args[0];
         const takeANewScreenShot = true;
         const sessionId = driver.sessionId;
@@ -179,7 +213,7 @@ class AIAppiumLens extends BasePlugin {
         const coordinates = await getCoordinatesByInput(text, screenshotPath, takeANewScreenShot, sessionId, index);
 
         if (!coordinates) {
-            throw new Error('Coordinates not found');
+            throw new Error(`Coordinates for locator/element not found for text: ${text}, Please check the text or locator`);
         }
 
         // Adjust coordinates based on the device multiplier
@@ -266,3 +300,4 @@ class AIAppiumLens extends BasePlugin {
 }
 
 export default AIAppiumLens;
+export {AIAppiumLens};

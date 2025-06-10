@@ -1,7 +1,7 @@
 {
   "name": "ai-appium-lens",
-  "version": "4.0.2",
-  "main": "index.js",
+  "version": "5.0.4",
+  "main": "dist/plugin.js",
   "scripts": {
     "build": "npx tsc",
     "test": "mocha --require ts-node/register -p test/plugin.spec.js --exit --timeout 260000",
@@ -24,7 +24,7 @@
   "appium": {
     "pluginName": "ai-appium-lens",
     "mainClass": "AIAppiumLens",
-    "pluginVersion": "4.0.2",
+    "pluginVersion": "5.0.4",
     "pluginType": "appium",
     "pluginPlatform": "android",
     "pluginDescription": "AI-powered Appium plugin that combines Google Vision Vertex AI for UI analysis and Gemini NLP for natural language understanding. Designed to make mobile app automation smarter, more intuitive, and accessible.",
@@ -37,9 +37,9 @@
     "pluginHomepage": ""
   },
   "devDependencies": {
-    "@appium/base-plugin": "^2.2.47",
+    "@appium/base-plugin": "^2.3.3",
     "@types/lokijs": "^1.5.14",
-    "appium-support": "^2.55.0",
+    "@appium/support": "6.0.6",
     "ts-loader": "^9.5.1",
     "typescript": "^5.7.2",
     "webpack-cli": "^5.1.4"
